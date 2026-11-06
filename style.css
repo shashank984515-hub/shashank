@@ -1,0 +1,478 @@
+:root {
+    color-scheme: light;
+    --ink: #452b38;
+    --muted: #9c7d8a;
+    --pink: #e85d82;
+    --pink-dark: #d94d73;
+    --rose: #fff0f3;
+    --line: #f0dce2;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-width: 320px;
+    min-height: 100vh;
+    margin: 0;
+    color: var(--ink);
+    background:
+        radial-gradient(ellipse at 12% 22%, rgba(255, 219, 228, .7), transparent 28rem),
+        radial-gradient(ellipse at 88% 78%, rgba(255, 227, 233, .72), transparent 30rem),
+        #fff9fa;
+    font-family: "DM Sans", sans-serif;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+.page-shell {
+    width: min(1120px, calc(100% - 64px));
+    min-height: 100vh;
+    margin: 0 auto;
+}
+
+.site-header {
+    display: flex;
+    height: 88px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--ink);
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 22px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.brand-mark {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    place-items: center;
+    border-radius: 12px;
+    color: #fff;
+    background: var(--pink);
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    transform: rotate(-7deg);
+}
+
+.header-note {
+    color: #a48692;
+    font-size: 12px;
+    letter-spacing: .04em;
+}
+
+.sparkle {
+    margin-right: 5px;
+    color: var(--pink);
+}
+
+.main-content {
+    display: flex;
+    min-height: calc(100vh - 88px);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 0 34px;
+}
+
+.intro {
+    max-width: 520px;
+    margin: 0 auto 30px;
+    text-align: center;
+}
+
+.eyebrow {
+    margin: 0 0 12px;
+    color: var(--pink);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .23em;
+}
+
+.eyebrow span {
+    padding: 0 5px;
+    font-size: 9px;
+}
+
+h1 {
+    margin: 0;
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: clamp(42px, 6vw, 58px);
+    font-weight: 600;
+    letter-spacing: -.045em;
+    line-height: 1.08;
+}
+
+h1 span {
+    color: var(--pink);
+    font-style: italic;
+}
+
+.intro-copy {
+    max-width: 370px;
+    margin: 14px auto 0;
+    color: #9b808b;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.calculator-card {
+    position: relative;
+    width: min(100%, 510px);
+    overflow: hidden;
+    padding: 30px 42px 22px;
+    border: 1px solid rgba(241, 220, 227, .9);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, .86);
+    box-shadow: 0 22px 70px rgba(145, 78, 100, .1), 0 3px 12px rgba(145, 78, 100, .04);
+}
+
+.card-decoration {
+    position: absolute;
+    color: #f7d8e1;
+    pointer-events: none;
+}
+
+.decoration-one {
+    top: 21px;
+    right: 24px;
+    font-size: 19px;
+}
+
+.decoration-two {
+    bottom: 60px;
+    left: 18px;
+    font-size: 17px;
+}
+
+.card-heading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    margin-bottom: 22px;
+}
+
+.card-heading p {
+    margin: 0;
+    color: #805c6b;
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 18px;
+}
+
+.mini-heart {
+    color: var(--pink);
+    font-size: 13px;
+}
+
+.name-fields {
+    display: grid;
+    grid-template-columns: 1fr 28px 1fr;
+    align-items: end;
+    gap: 12px;
+}
+
+.field label {
+    display: block;
+    margin: 0 0 8px 2px;
+    color: #755563;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.field input {
+    width: 100%;
+    height: 48px;
+    padding: 0 13px;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    outline: none;
+    color: var(--ink);
+    background: #fffafb;
+    font-size: 14px;
+    transition: border-color .2s, box-shadow .2s, background .2s;
+}
+
+.field input::placeholder {
+    color: #c2aab3;
+}
+
+.field input:focus {
+    border-color: #e98aa3;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(232, 93, 130, .12);
+}
+
+.heart-divider {
+    display: grid;
+    height: 48px;
+    place-items: center;
+    color: #e895aa;
+    font-size: 16px;
+}
+
+.calculate-button {
+    display: flex;
+    width: 100%;
+    height: 49px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 21px;
+    border: 0;
+    border-radius: 9px;
+    color: #fff;
+    background: linear-gradient(105deg, #ed7895, #e85d82);
+    box-shadow: 0 7px 16px rgba(232, 93, 130, .2);
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 700;
+    transition: transform .18s, box-shadow .18s, filter .18s;
+}
+
+.calculate-button span:last-child {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.calculate-button:hover {
+    box-shadow: 0 9px 22px rgba(232, 93, 130, .3);
+    filter: saturate(1.08);
+    transform: translateY(-1px);
+}
+
+.calculate-button:active {
+    transform: translateY(0);
+}
+
+.calculate-button:focus-visible,
+.try-again:focus-visible,
+.brand:focus-visible {
+    outline: 3px solid rgba(232, 93, 130, .42);
+    outline-offset: 3px;
+}
+
+.disclaimer {
+    margin: 17px 0 0;
+    color: #b49ba5;
+    font-size: 10px;
+    text-align: center;
+}
+
+.disclaimer span {
+    color: #e994aa;
+}
+
+.result {
+    text-align: center;
+}
+
+.result[hidden] {
+    display: none;
+}
+
+.result-divider {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    margin: 20px 0 12px;
+    color: #e59aae;
+    font-size: 11px;
+}
+
+.result-divider::before,
+.result-divider::after {
+    height: 1px;
+    flex: 1;
+    background: #f4e3e8;
+    content: "";
+}
+
+.result-names {
+    margin: 0;
+    color: #9c7b89;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .04em;
+}
+
+.score-wrap {
+    display: flex;
+    justify-content: center;
+    margin: 9px 0 1px;
+}
+
+.score-heart {
+    position: relative;
+    width: 124px;
+    height: 112px;
+}
+
+.score-heart svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    filter: drop-shadow(0 5px 7px rgba(225, 75, 112, .15));
+}
+
+.heart-track,
+.heart-fill {
+    fill: #f9e6eb;
+}
+
+.heart-fill {
+    fill: var(--pink);
+    clip-path: inset(calc(100% - var(--score)) 0 0);
+    transition: clip-path 850ms cubic-bezier(.2, .8, .2, 1);
+}
+
+.score-number {
+    position: absolute;
+    inset: 4px 0 0;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-size: 22px;
+    font-weight: 700;
+    text-shadow: 0 1px 5px rgba(117, 41, 65, .25);
+}
+
+.result-title {
+    margin: 5px 0 5px;
+    color: var(--ink);
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.result-message {
+    max-width: 340px;
+    margin: 0 auto;
+    color: #947987;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.try-again {
+    margin: 12px 0 0;
+    padding: 6px 10px;
+    border: 0;
+    color: var(--pink-dark);
+    background: transparent;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.try-again span {
+    padding-left: 3px;
+}
+
+.result-visible {
+    animation: rise-in .45s ease both;
+}
+
+.footer-note {
+    margin: 26px 0 0;
+    color: #c1a8b2;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .2em;
+}
+
+.footer-note span {
+    padding-left: 4px;
+    color: #e995aa;
+}
+
+@keyframes rise-in {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 600px) {
+    .page-shell {
+        width: min(100% - 36px, 510px);
+    }
+
+    .site-header {
+        height: 70px;
+    }
+
+    .brand {
+        font-size: 19px;
+    }
+
+    .header-note {
+        max-width: 140px;
+        font-size: 10px;
+        text-align: right;
+    }
+
+    .main-content {
+        min-height: calc(100vh - 70px);
+        justify-content: flex-start;
+        padding: 35px 0 25px;
+    }
+
+    .intro {
+        margin-bottom: 25px;
+    }
+
+    h1 {
+        font-size: 47px;
+    }
+
+    .intro-copy {
+        max-width: 310px;
+        font-size: 13px;
+    }
+
+    .calculator-card {
+        padding: 27px 22px 20px;
+        border-radius: 18px;
+    }
+
+    .name-fields {
+        grid-template-columns: 1fr 20px 1fr;
+        gap: 7px;
+    }
+
+    .field input {
+        padding: 0 10px;
+        font-size: 13px;
+    }
+
+    .disclaimer {
+        font-size: 9px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+    }
+}
