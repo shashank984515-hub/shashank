@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fff7f8">
+    <meta name="description" content="A little fun, a lot of love. Find out your romantic compatibility with the Love Notes love calculator.">
+    <title>Love Notes — Love Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="page-shell">
+        <header class="site-header">
+            <a class="brand" href="#" aria-label="Love Notes home">
+                <span class="brand-mark" aria-hidden="true">♥</span>
+                <span>love notes</span>
+            </a>
+            <span class="header-note"><span class="sparkle" aria-hidden="true">✦</span> made for the hopeless romantics</span>
+        </header>
+
+        <main class="main-content">
+            <section class="intro" aria-labelledby="page-title">
+                <p class="eyebrow"><span aria-hidden="true">✦</span> THE LOVE LAB <span aria-hidden="true">✦</span></p>
+                <h1 id="page-title">Is it written<br>in the <span>stars?</span></h1>
+                <p class="intro-copy">A little curiosity never hurt. Enter two names and let the universe do its thing.</p>
+            </section>
+
+            <section class="calculator-card" aria-label="Love compatibility calculator">
+                <div class="card-decoration decoration-one" aria-hidden="true">✦</div>
+                <div class="card-decoration decoration-two" aria-hidden="true">♡</div>
+                <div class="card-heading">
+                    <span class="mini-heart" aria-hidden="true">♥</span>
+                    <p>Two names. One little spark.</p>
+                </div>
+
+                <form id="love-form">
+                    <div class="name-fields">
+                        <div class="field">
+                            <label for="your-name">Your name</label>
+                            <input id="your-name" name="yourName" type="text" placeholder="e.g. Alex" autocomplete="given-name" maxlength="40" required>
+                        </div>
+                        <span class="heart-divider" aria-hidden="true">♥</span>
+                        <div class="field">
+                            <label for="their-name">Their name</label>
+                            <input id="their-name" name="theirName" type="text" placeholder="e.g. Jamie" autocomplete="off" maxlength="40" required>
+                        </div>
+                    </div>
+                    <button class="calculate-button" type="submit">
+                        <span>Calculate our love</span>
+                        <span aria-hidden="true">♡</span>
+                    </button>
+                </form>
+
+                <div class="result" id="result" aria-live="polite" aria-atomic="true" hidden>
+                    <div class="result-divider"><span>✦</span></div>
+                    <p class="result-names" id="result-names"></p>
+                    <div class="score-wrap">
+                        <div class="score-heart" aria-hidden="true">
+                            <svg viewBox="0 0 100 90" role="presentation">
+                                <path class="heart-track" d="M50 86 12 49C-7 30 7 3 29 3c10 0 17 5 21 13C55 8 62 3 72 3c22 0 35 27 16 46L50 86Z"/>
+                                <path class="heart-fill" id="heart-fill" d="M50 86 12 49C-7 30 7 3 29 3c10 0 17 5 21 13C55 8 62 3 72 3c22 0 35 27 16 46L50 86Z"/>
+                            </svg>
+                            <span class="score-number" id="score">0%</span>
+                        </div>
+                    </div>
+                    <p class="result-title" id="result-title"></p>
+                    <p class="result-message" id="result-message"></p>
+                    <button class="try-again" id="try-again" type="button">Try another pair <span aria-hidden="true">↗</span></button>
+                </div>
+                <p class="disclaimer">Just for fun — the best kind of chemistry can't be calculated <span aria-hidden="true">♡</span></p>
+            </section>
+
+            <p class="footer-note">GOOD THINGS TAKE TWO <span aria-hidden="true">♥</span></p>
+        </main>
+    </div>
+
+    <script>
+        const form = document.querySelector("#love-form");
+        const result = document.querySelector("#result");
+        const tryAgain = document.querySelector("#try-again");
+
+        function getCompatibility(firstName, secondName) {
+            const names = [firstName.trim().toLocaleLowerCase(), secondName.trim().toLocaleLowerCase()].sort();
+            const pair = names.join("♥");
+            let hash = 0;
+
+            for (const character of pair) {
+                hash = (hash * 31 + character.charCodeAt(0)) >>> 0;
+            }
+
+            return 45 + (hash % 56);
+        }
+
+        function getLoveMessage(score) {
+            if (score >= 90) {
+                return ["A cosmic kind of love", "The stars are practically writing your story for you. Keep that spark glowing."];
+            }
+            if (score >= 75) {
+                return ["Something special", "There is a lovely little spark here. Make time for the moments that bring you closer."];
+            }
+            if (score >= 60) {
+                return ["A sweet possibility", "Every great connection starts somewhere. Stay curious and see where it goes."];
+            }
+            return ["A little plot twist", "The universe loves a surprise. A good connection is always more than a number."];
+        }
+
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            if (!form.reportValidity()) return;
+
+            const firstName = form.elements.yourName.value.trim();
+            const secondName = form.elements.theirName.value.trim();
+            const score = getCompatibility(firstName, secondName);
+            const [title, message] = getLoveMessage(score);
+
+            document.querySelector("#result-names").textContent = `${firstName} + ${secondName}`;
+            document.querySelector("#score").textContent = `${score}%`;
+            document.querySelector("#result-title").textContent = title;
+            document.querySelector("#result-message").textContent = message;
+            document.querySelector("#heart-fill").style.setProperty("--score", `${score}%`);
+            result.hidden = false;
+            result.classList.remove("result-visible");
+            requestAnimationFrame(() => result.classList.add("result-visible"));
+        });
+
+        tryAgain.addEventListener("click", () => {
+            result.hidden = true;
+            form.reset();
+            form.elements.yourName.focus();
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
